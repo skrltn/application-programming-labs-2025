@@ -1,11 +1,13 @@
 import os
-import requests
-from bs4 import BeautifulSoup
+import re
+import time
 from typing import List, Tuple
 from urllib.parse import urljoin
-import time
-import re
-from utils import ensure_directory, create_annotation_file
+
+import requests
+from bs4 import BeautifulSoup
+
+from utils import create_annotation_file, ensure_directory
 
 
 class SoundDownloader:
@@ -202,3 +204,4 @@ class SoundDownloader:
 
         except Exception as e:
             print(f"Общая ошибка при скачивании: {e}")
+

@@ -59,17 +59,9 @@ def add_min_amplitude_column(df: pd.DataFrame) -> pd.DataFrame:
     """
     print("Вычисление минимальных амплитуд...")
     
-    # Создаем список для хранения результатов
-    min_amplitudes = []
-    
-    # Обрабатываем каждый аудиофайл
-    for _, row in df.iterrows():
-        audio_path = row['Абсолютный путь к файлу']
-        min_amp = calculate_min_amplitude(audio_path)
-        min_amplitudes.append(min_amp)
-    
-    # Добавляем новую колонку
-    df['Минимальная амплитуда'] = min_amplitudes
+    df['Минимальная амплитуда'] = df['Абсолютный путь к файлу'].apply(
+        calculate_min_amplitude
+    )
     
     print("Вычисление завершено.")
     return df

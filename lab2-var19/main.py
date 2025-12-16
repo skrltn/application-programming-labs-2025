@@ -1,6 +1,7 @@
 import argparse
-import sys
 import os
+import sys
+
 from downloader import SoundDownloader
 from iterator import SoundFileIterator
 
@@ -104,3 +105,4 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
+

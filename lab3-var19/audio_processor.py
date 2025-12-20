@@ -5,7 +5,6 @@
 import numpy as np
 import soundfile as sf
 from typing import Tuple, Optional
-import sys
 
 
 class AudioProcessor:
@@ -36,12 +35,10 @@ class AudioProcessor:
         try:
             self.data, self.samplerate = sf.read(self.file_path)
             return self.data, self.samplerate
-        except FileNotFoundError:
-            print(f"Ошибка: файл не найден")
-            sys.exit(1)
+        except FileNotFoundError as e:
+            raise FileNotFoundError(f"Файл не найден: {self.file_path}") from e
         except Exception as e:
-            print(f"Ошибка загрузки файла: {e}")
-            sys.exit(1)
+            raise Exception(f"Ошибка загрузки файла: {e}") from e
     
     def crop_audio(self, start_time: float, end_time: float) -> np.ndarray:
         """
@@ -85,5 +82,4 @@ class AudioProcessor:
         try:
             sf.write(output_path, data, self.samplerate)
         except Exception as e:
-            print(f"Ошибка сохранения: {e}")
-            sys.exit(1)
+            raise Exception(f"Ошибка сохранения файла: {e}") from e
